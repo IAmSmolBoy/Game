@@ -1,0 +1,15 @@
+#title{
+    position:absolute;
+    left:45vw;
+    color:rgb(0,100,255);
+}
+body{
+    background-color:black;
+}
+#grass{
+    position:absolute;
+    top:90vh;
+    height:10vh;
+    width:100vw;
+    background-color: green;
+}

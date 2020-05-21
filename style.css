@@ -1,13 +1,18 @@
 #body{
-    background-color: blue;
+    background-color: aqua;
 }
-/* #plane{
-    position:absolute;
-    top:50vh;
-    left:50vw;
+#plane{
+    position:absolute;  
     width:100px;
     height: 100px;
     text-align: inherit;
     background-color: black;
     color:red;
-} */
+}
+#grass{
+    position:absolute;
+    top:90vh;
+    height:10vh;
+    width:100vw;
+    background-color: green;
+}
