@@ -1,8 +1,8 @@
 let plane=document.getElementById("plane")
 let body=document.getElementById('body')
-
 document.addEventListener('mousemove',(e)=>{
-    document.head.innerHTML=`<style>#plane{top:${e.screenY-150}px;
-    left:${e.screenX-50}px;
-}</style>`
-})        
+    console.log(e.x+e.y)
+    document.head.innerHTML=`<style>#plane{top:${e.y-50}px;
+    left:${e.x-50}px;
+}</style>`  
+})          

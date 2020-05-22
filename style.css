@@ -1,5 +1,5 @@
 #body{
-    background-color: aqua;
+    background-color: skyblue;
 }
 #plane{
     position:absolute;  
@@ -11,6 +11,7 @@
 }
 #grass{
     position:absolute;
+    left:0px;
     top:90vh;
     height:10vh;
     width:100vw;
