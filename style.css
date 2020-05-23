@@ -1,7 +1,15 @@
 body{
     background-color: skyblue;
-    cursor:none;
-}   
+    width:100vw;
+    height:100vh;
+}
+#gameover{
+    position:absolute;
+    left:40vw;
+    top:45vh;
+    font-size: 30px;
+    color:red;
+}
 #plane{
     position:absolute;  
     width:100px;
@@ -20,14 +28,14 @@ body{
     background-color: green;
     cursor:none;
 }
-#start{
-    position:absolute;
-    top:50vh;
-    left:45vw;
-}
 #title{
     position:absolute;
     left:43vw;
     top:0vh;
     font-size:30px;             
+}
+#start{
+    position:absolute;
+    top:50vh;
+    left:45vw;
 }
