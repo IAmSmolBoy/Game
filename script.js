@@ -4,7 +4,6 @@ var startBtn=document.getElementById('start')
 var window=document.getElementsByTagName('body')
 var head=document.getElementsByTagName('head')
 var GameOver=true
-var StartGame=false
 var posY=0
 var posX=0
 function Delete(id){
@@ -17,8 +16,7 @@ function RanNum(){
 }
 
 startBtn.addEventListener('click',(e)=>{
-    console.log(0)
-    StartGame=true
+    true
     GameOver=false
     document.body.innerHTML+=`<div id="plane"></div>`
     posX=e.x-50
@@ -36,9 +34,9 @@ startBtn.addEventListener('click',(e)=>{
             </style>`
     Delete('start')
 })
-    document.addEventListener('mousemove',(e)=>{
-        if(posY<0&&GameOver===false&&StartGame===true){
-            StartGame=false
+    document.body.addEventListener('mousemove',(e)=>{
+        if(posY<0){
+            console.log(2)
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
             <button id="start">Restart Game</button>
@@ -53,13 +51,37 @@ startBtn.addEventListener('click',(e)=>{
                     top:50vh;
                 }
                 </style>`
+                document.getElementById('start').addEventListener('click',(e)=>{
+                    GameOver=false
+                    document.body.innerHTML+=`<div id="plane"></div>`
+                    posX=e.x-50
+                    posY=e.y-50
+                    document.head.innerHTML=`
+                    <style>#plane{
+                        left:${e.x}px;
+                        top:${e.y}px;
+                        }
+                        body{
+                            background-color:skyblue;
+                            width:100vw;
+                            height:100vh;
+                            cursor:none;}
+                            </style>`
+                    Delete('start')
+                    Delete('gameover')
+                })
         }
-        if(StartGame===true&&GameOver===false){
+        if(GameOver===false){
             posY+=e.movementY
             posX+=e.movementX
             document.head.innerHTML=`<style>#plane{
             left:${posX}px;
             top:${posY}px;
-            }</style>`
+            }
+            body{
+                background-color:skyblue;
+                width:100vw;
+                height:100vh;
+                cursor:none;}</style>   `
         }
     })
