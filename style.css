@@ -5,7 +5,7 @@ body{
 }
 #gameover{
     position:absolute;
-    left:40vw;
+    left:43vw;
     top:45vh;
     font-size: 30px;
     color:red;
@@ -38,4 +38,8 @@ body{
     position:absolute;
     top:50vh;
     left:45vw;
+}
+.pipes{
+    background-color:red;
+    width:25px;
 }
