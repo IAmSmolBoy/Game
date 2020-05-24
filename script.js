@@ -1,5 +1,3 @@
-var plane=document.getElementById("plane")
-var body=document.getElementsByTagName("body")
 var startBtn=document.getElementById('start')
 var body=document.body
 var head=document.head
@@ -9,6 +7,7 @@ var i=0
 var posY=0
 var posX=0
 var PipeDist=0
+
 function Pipes(height,num,dist){
     document.body.innerHTML+=`<div id='Pipe${num}${height}' class='pipes'></div>`
     document.head.innerHTML+=`<style>#Pipe${num}${height}{
@@ -30,30 +29,31 @@ function Delete(id){
 function RanNum(){
     return `${Math.random()}`.slice(2,4)
 }
-function DetectGameOver(){
+function CreatePipes(){
     setTimeout(function(){
         var Height=RanNum()
         console.log(Height)
         if(GameOver===false){
             Pipes(Height,i)
             i++
-            DetectGameOver()
+            PipeDist+=10
+            CreatePipes()
         } return Height
     }, 10000);
 }
 
 startBtn.addEventListener('click',(e)=>{
     GameOver=false
-    DetectGameOver()
+    CreatePipes()
     document.body.innerHTML+=`<div id="plane"></div>`
-    posX=e.x-50
-    posY=e.y-50
-    plane.style.left=`${e.x+50}px`
-    plane.style.top=`${e.y+50}px`
-    body.style.background='skyblue'
-    body.style.width='100vw'
-    body.style.height='100vh'
-    body.style.cursor='none'
+    posX=e.x+50
+    posY=e.y+50
+    document.getElementById("plane").style.left=`${e.x+50}px`
+    document.getElementById("plane").style.top=`${e.y+50}px`
+    document.body.style.background='skyblue'
+    document.body.style.width='100vw'
+    document.body.style.height='100vh'
+    document.body.style.cursor='none'
     Delete('start')
 })
     document.body.addEventListener('mousemove',(e)=>{
@@ -65,23 +65,22 @@ startBtn.addEventListener('click',(e)=>{
                 <script src="script.js"></script>
                 <link rel="stylesheet" href="style.css">`
                 GameOver=true
-                body.style.background='skyblue'
-                body.style.width='100vw'
-                body.style.height='100vh'
-                plane.style.top='50vh'
-                plane.style.left='50vw'
+                document.body.style.background='skyblue'
+                document.body.style.width='100vw'
+                document.body.style.height='100vh'
+                document.body.style.cursor='auto'
                     document.getElementById('start').addEventListener('click',(e)=>{
                         GameOver=false
-                        DetectGameOver()
+                        CreatePipes()
                         document.body.innerHTML+=`<div id="plane"></div>`
                         posX=e.x+50
                         posY=e.y+50
-                        plane.style.left=`${e.x+50}px`
-                        plane.style.top=`${e.y+50}px`
-                        body.style.background='skyblue'
-                        body.style.width='100vw'
-                        body.style.height='100vh'
-                        body.style.cursor=`none`
+                        document.getElementById("plane").style.left=`${e.x+50}px`
+                        document.getElementById("plane").style.top=`${e.y+50}px`
+                        document.body.style.background='skyblue'
+                        document.body.style.width='100vw'
+                        document.body.style.height='100vh'
+                        document.body.style.cursor=`none`
                         Delete('start')
                         Delete('gameover')
                 })
@@ -90,11 +89,11 @@ startBtn.addEventListener('click',(e)=>{
         if(GameOver===false){
             posY+=e.movementY
             posX+=e.movementX
-            plane.style.left=`${posX}px`
-            plane.style.top=`${posY}px`
-            body.style.background='skyblue'
-            body.style.width=`100vw`
-            body.style.height=`100vh`
-            body.style.cursor=`none` 
+            document.getElementById("plane").style.left=`${e.x}px`
+            document.getElementById("plane").style.top=`${e.y}px`
+            document.body.style.background='skyblue'
+            document.body.style.width=`100vw`
+            document.body.style.height=`100vh`
+            document.body.style.cursor=`none` 
         }
     })
