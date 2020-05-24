@@ -40,6 +40,9 @@ body{
     left:45vw;
 }
 .pipes{
+    position:absolute;
+    top:10vh;
+    left:10vw;
     background-color:red;
     width:25px;
 }
