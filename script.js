@@ -3,23 +3,20 @@ var body=document.body
 var head=document.head
 var pipes=document.getElementsByClassName('pipes')
 var GameOver=true
-var i=0
+var Count=0
 var posY=0
 var posX=0
-var PipeDist=0
+var FirstPipeX=0
+var PipeList=[]
 
-function Pipes(height,num,dist){
-    document.body.innerHTML+=`<div id='Pipe${num}${height}' class='pipes'></div>`
-    document.head.innerHTML+=`<style>#Pipe${num}${height}{
-        height:${height}vh;
-    }</style>`
+function FindPipeHeight(i){
+    return PipeList[i-1].slice(PipeList[i-1].length-2,PipeList[i-1].length)
 }
-function Collided(x1,y1,x2,y2){
-    if (x1+50>x2||x1-50<x2||y1+50>y2||y1-50<y2) {
-        return true
-    } else {
-        return false
-    }
+function Pipes(height,num){
+    PipeList.push(`Pipe${num}${height}`)
+    document.body.innerHTML+=`<div id='Pipe${num}${height}' class='pipes'></div>`
+    document.getElementById(`Pipe${num}${height}`).style.left=`${100}vw`
+    document.getElementById(`Pipe${num}${height}`).style.height=`${height}vh`
 }
 function Delete(id){
     var Thing=document.getElementById(id);
@@ -31,14 +28,19 @@ function RanNum(){
 }
 function CreatePipes(){
     setTimeout(function(){
-        var Height=RanNum()
-        console.log(Height)
         if(GameOver===false){
-            Pipes(Height,i)
-            i++
-            PipeDist+=10
+            var Height=RanNum() 
+            if(Height>90){
+                Height-=10
+            }
+            if(Height<10){
+                Height+=10
+            }
+            console.log(Height)
+            Pipes(Height,Count)
+            Count++
             CreatePipes()
-        } return Height
+        }
     }, 10000);
 }
 
@@ -48,8 +50,8 @@ startBtn.addEventListener('click',(e)=>{
     document.body.innerHTML+=`<div id="plane"></div>`
     posX=e.x+50
     posY=e.y+50
-    document.getElementById("plane").style.left=`${e.x+50}px`
-    document.getElementById("plane").style.top=`${e.y+50}px`
+    document.getElementById("plane").style.left=`${e.x-50}px`
+    document.getElementById("plane").style.top=`${e.y-50}px`
     document.body.style.background='skyblue'
     document.body.style.width='100vw'
     document.body.style.height='100vh'
@@ -75,8 +77,8 @@ startBtn.addEventListener('click',(e)=>{
                         document.body.innerHTML+=`<div id="plane"></div>`
                         posX=e.x+50
                         posY=e.y+50
-                        document.getElementById("plane").style.left=`${e.x+50}px`
-                        document.getElementById("plane").style.top=`${e.y+50}px`
+                        document.getElementById("plane").style.left=`${e.x-50}px`
+                        document.getElementById("plane").style.top=`${e.y-50}px`
                         document.body.style.background='skyblue'
                         document.body.style.width='100vw'
                         document.body.style.height='100vh'
@@ -89,8 +91,8 @@ startBtn.addEventListener('click',(e)=>{
         if(GameOver===false){
             posY+=e.movementY
             posX+=e.movementX
-            document.getElementById("plane").style.left=`${e.x}px`
-            document.getElementById("plane").style.top=`${e.y}px`
+            document.getElementById("plane").style.left=`${e.x-50}px`
+            document.getElementById("plane").style.top=`${e.y-50}px`
             document.body.style.background='skyblue'
             document.body.style.width=`100vw`
             document.body.style.height=`100vh`
