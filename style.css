@@ -12,8 +12,8 @@ body{
 }
 #plane{
     position:absolute;  
-    width:100px;
-    height: 100px;
+    width:5ex;
+    height: 5ex;
     text-align: inherit;
     background-color: black;
     color:red;
@@ -43,4 +43,10 @@ body{
     position:absolute;
     background-color:red;
     width:5ex;
+    top:0ex;
+}
+.OtherPipes{
+    position: absolute;
+    background-color: red;
+    width: 5ex;
 }
