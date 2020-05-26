@@ -74,8 +74,8 @@ function Movement(){
 }
 
 startBtn.addEventListener('click',(e)=>{
-    posX=e.x
-    posY=e.y
+    posX=e.clientX/12
+    posY=e.clientY/5
     GameOver=false
     if(GameOver===false){
         var Height=RanNum() 
@@ -85,15 +85,16 @@ startBtn.addEventListener('click',(e)=>{
     CreatePipes()
     Movement()
     document.body.innerHTML+=`<div id="plane"></div>`
-    document.getElementById("plane").style.left=`${e.x/7.5+3.5}ex`
-    document.getElementById("plane").style.top=`${e.y/7.5+3.5}ex`
+    document.getElementById("plane").style.left=`${e.clientX-12.5}px`
+    document.getElementById("plane").style.top=`${e.clientY-12.5}px`
     document.body.style.cursor='none'
     Delete('start')
     Delete('title')
 })
 document.body.addEventListener('mousemove',(e)=>{
-    if(posX<=0||posY<=0||posY>=525){
+    if(posX<=0||posY<=0||posY>=105){
         if(GameOver===false){
+            console.log(e.clientX/12,e.clientY/5)
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
             <button id="start">Restart Game</button>
@@ -103,8 +104,8 @@ document.body.addEventListener('mousemove',(e)=>{
             document.body.style.cursor='auto'
             document.getElementById('start').addEventListener('click',(e)=>{
                 PipeList=[]
-                posX=100
-                posY=100
+                posX=50
+                posY=50
                 GameOver=false
                 if(GameOver===false){
                     var Height=RanNum() 
@@ -114,8 +115,8 @@ document.body.addEventListener('mousemove',(e)=>{
                 CreatePipes()
                 Movement()
                 document.body.innerHTML+=`<div id="plane"></div>`
-                document.getElementById("plane").style.left=`${e.x/7.5+3.5}ex`
-                document.getElementById("plane").style.top=`${e.y/7.5+3.5}ex`
+                document.getElementById("plane").style.left=`${e.clientX-12.5}px`
+                document.getElementById("plane").style.top=`${e.clientY-12.5}px`
                 document.body.style.cursor=`none`
                 Delete('start')
                 Delete('gameover')
@@ -123,10 +124,11 @@ document.body.addEventListener('mousemove',(e)=>{
         }
     }
     if(GameOver===false){
-        document.getElementById("plane").style.left=`${e.x/7.5+3.5}ex`
-        document.getElementById("plane").style.top=`${e.y/7.5+3.5}ex`
-        posX=e.x-50
-        posY=e.y
+        console.log(e.clientX/12,e.clientY/5)
+        document.getElementById("plane").style.left=`${e.clientX-12.5}px`
+        document.getElementById("plane").style.top=`${e.clientY-12.5}px`
+        posX=e.clientX/12
+        posY=e.clientY/5
         document.body.style.cursor=`none` 
     }
 })
