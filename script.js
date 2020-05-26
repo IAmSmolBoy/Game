@@ -18,7 +18,7 @@ function Pipes(height,num){
     <div id='OtherPipe${num}${height}' class="OtherPipes" class="PipePipes"></div>`
     document.getElementById(`Pipe${num}${height}`).style.left=`200ex`
     document.getElementById(`Pipe${num}${height}`).style.height=`${height}vh`
-    document.getElementById(`OtherPipe${num}${height}`).style.height=`${1000-height}vh`
+    document.getElementById(`OtherPipe${num}${height}`).style.height=`${100-height}vh`
     document.getElementById(`OtherPipe${num}${height}`).style.left=`200ex`
     document.getElementById(`OtherPipe${num}${height}`).style.top=`${20+parseInt(height)}vh`
 }
@@ -55,11 +55,10 @@ function CreatePipes(){
         }
     }, 1000);
 }
-function Movement(PlayerX){
+function Movement(){
     setTimeout(function(){
         if(GameOver===false){
             for(i=1;i<=PipeList.length;i++){
-                console.log(`Other${PipeList[i-1]}`,document.getElementById(`Other${PipeList[i-1]}`))
                 document.getElementById(`Other${PipeList[i-1]}`).style.left=`${parseInt(document.getElementById(`Other${PipeList[i-1]}`).style.left)-1}ex`
                 document.getElementById(`${PipeList[i-1]}`).style.left=`${parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)-1}ex`
                 if(document.getElementById(`${PipeList[i-1]}`).style.left.slice(0,1)==='-'){
@@ -69,14 +68,14 @@ function Movement(PlayerX){
                 }
             }
             FirstPipeX++
+            Movement()
         }
-        Movement()
     },30)
 }
 
 startBtn.addEventListener('click',(e)=>{
-    posX=e.x-25
-    posY=e.y-25
+    posX=e.x
+    posY=e.y
     GameOver=false
     if(GameOver===false){
         var Height=RanNum() 
@@ -93,7 +92,7 @@ startBtn.addEventListener('click',(e)=>{
     Delete('title')
 })
 document.body.addEventListener('mousemove',(e)=>{
-    if(posX<0||posY<0||posY>525){
+    if(posX<=0||posY<=0||posY>=525){
         if(GameOver===false){
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
@@ -126,8 +125,8 @@ document.body.addEventListener('mousemove',(e)=>{
     if(GameOver===false){
         document.getElementById("plane").style.left=`${e.x/7.5+3.5}ex`
         document.getElementById("plane").style.top=`${e.y/7.5+3.5}ex`
-        posX=e.x-25
-        posY=e.y-25
+        posX=e.x-50
+        posY=e.y
         document.body.style.cursor=`none` 
     }
 })
