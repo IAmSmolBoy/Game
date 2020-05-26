@@ -53,7 +53,7 @@ function CreatePipes(){
             Count++
             CreatePipes()
         }
-    }, 2000);
+    }, 3000);
 }
 function Movement(){
     setTimeout(function(){
