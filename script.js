@@ -53,9 +53,9 @@ function CreatePipes(){
             Count++
             CreatePipes()
         }
-    }, 3000);
+    }, 1000);
 }
-function Movement(){
+function Movement(PlayerX){
     setTimeout(function(){
         if(GameOver===false){
             for(i=1;i<=PipeList.length;i++){
@@ -65,13 +65,13 @@ function Movement(){
                 if(document.getElementById(`${PipeList[i-1]}`).style.left.slice(0,1)==='-'){
                     Delete(`${PipeList[i-1]}`)
                     Delete(`Other${PipeList[i-1]}`)
-                    PipeList.splice(0,1)
+                    PipeList.splice(0,1)        
                 }
             }
             FirstPipeX++
         }
         Movement()
-    },100)
+    },30)
 }
 
 startBtn.addEventListener('click',(e)=>{
@@ -93,7 +93,7 @@ startBtn.addEventListener('click',(e)=>{
     Delete('title')
 })
 document.body.addEventListener('mousemove',(e)=>{
-    if(posX<0||posY<0||posY>475){
+    if(posX<0||posY<0||posY>525){
         if(GameOver===false){
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
