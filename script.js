@@ -15,10 +15,10 @@ function Pipes(height,num){
     PipeList.push(`Pipe${num}${height}`)
     document.body.innerHTML+=`<div id='Pipe${num}${height}' class='pipes' class='PipePipes'></div>
     <div id='OtherPipe${num}${height}' class="OtherPipes" class="PipePipes"></div>`
-    document.getElementById(`Pipe${num}${height}`).style.left=`700px`
+    document.getElementById(`Pipe${num}${height}`).style.left=`1500px`
     document.getElementById(`Pipe${num}${height}`).style.height=`${height}vh`
     document.getElementById(`OtherPipe${num}${height}`).style.height=`${100-height}vh`
-    document.getElementById(`OtherPipe${num}${height}`).style.left=`700px`
+    document.getElementById(`OtherPipe${num}${height}`).style.left=`1500px`
     document.getElementById(`OtherPipe${num}${height}`).style.top=`${20+parseInt(height)}vh`
 }
 function Delete(id){
@@ -81,13 +81,6 @@ function Movement(){
                 }
                 if(parseInt(OtherPipeloc.left)>=posX&&parseInt(OtherPipeloc.top)>=posY){
                     console.log('hit')
-                    document.body.innerHTML=`<div id="gameover">Game Over</div>
-                    <div id="grass"></div>
-                    <button id="start">Restart Game</button>
-                    <script src="script.js"></script>
-                    <link rel="stylesheet" href="style.css">`
-                    GameOver=true
-                    document.body.style.cursor='auto'
                 }
             }
             Movement()
