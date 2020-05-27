@@ -13,8 +13,8 @@ body{
 }
 #plane{
     position:absolute;  
-    width:5ex;
-    height: 5ex;
+    width:25px;
+    height: 25px;
     text-align: inherit;
     background-color: black;
     color:red;
@@ -24,7 +24,7 @@ body{
     position:absolute;
     left:0px;
     top:90vh;
-    height:10vh;
+    height:15vh;
     width:100vw;
     background-color: green;
     cursor:none;
@@ -44,11 +44,11 @@ body{
 .pipes{
     position:absolute;
     background-color:red;
-    width:5ex;
-    top:0ex;
+    width:25px;
+    top:0px;
 }
 .OtherPipes{
     position: absolute;
     background-color: red;
-    width: 5ex;
+    width: 25px;
 }

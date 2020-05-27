@@ -54,6 +54,9 @@ function CreatePipes(){
         }
     }, 1000);
 }
+function ScrollUp(){
+    window.scroll(0,0)
+}
 function Movement(){
     window.scroll(0,0)
     setTimeout(function(){
@@ -63,32 +66,29 @@ function Movement(){
                 var OtherPipeloc=document.getElementById(`Other${PipeList[i-1]}`).style
                 OtherPipeloc.left=`${parseInt(OtherPipeloc.left)-5}px`
                 Pipeloc.left=`${parseInt(Pipeloc.left)-5}px`
-                console.log(parseInt(`${Pipeloc.left}`.slice(0,Pipeloc.left.length-2)))
                 if(Pipeloc.left.slice(0,1)==='-'){
                     Delete(`${PipeList[i-1]}`)
                     Delete(`Other${PipeList[i-1]}`)
                     PipeList.splice(0,1)        
                 }
-                if(parseInt(`${Pipeloc.left}`.slice(0,Pipeloc.left.length-2))>=posX&&parseInt(`${Pipeloc.top}`)<=posY){
-                    console.log('hit')
-                    document.body.innerHTML=`<div id="gameover">Game Over</div>
-                    <div id="grass"></div>
-                    <button id="start">Restart Game</button>
-                    <script src="script.js"></script>
-                    <link rel="stylesheet" href="style.css">`
-                    GameOver=true
-                    document.body.style.cursor='auto'                   
-                }
-                if(parseInt(OtherPipeloc.left)>=posX&&parseInt(OtherPipeloc.top)>=posY){
-                    console.log('hit')
-                }
             }
             Movement()
+            ScrollUp()
         }
     },30)
 }
-function ScrollUp(){
-    window.scroll(0,0)
+function CollisionTest(){
+    setTimeout(function(){
+        for(i=1;i<=PipeList.length;i++){
+            var PipeX=document.getElementById(`${PipeList[i-1]}`).style.left
+            var PipeY=FindPipeHeight(i)
+            if(posX>parseInt(PipeX)){
+                console.log(`past${i}`)
+            }
+            // console.log(`${parseInt(PipeX)}  `,`${PipeY}`,PipeList[i-1])
+        }
+    CollisionTest()    
+    },30)   
 }
 
 startBtn.addEventListener('click',(e)=>{
@@ -102,6 +102,7 @@ startBtn.addEventListener('click',(e)=>{
     }
     CreatePipes()
     Movement()
+    CollisionTest()
     document.body.innerHTML+=`<div id="plane"></div>`
     document.getElementById("plane").style.left=`${e.clientX-2.5}px`
     document.getElementById("plane").style.top=`${e.clientY-2.5}px`
@@ -112,7 +113,6 @@ startBtn.addEventListener('click',(e)=>{
 document.body.addEventListener('mousemove',(e)=>{
     if(posX<=0||posY<=0||posY>=530){
         if(GameOver===false){
-            console.log(e.clientX,e.clientY)
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
             <button id="start">Restart Game</button>
@@ -132,6 +132,7 @@ document.body.addEventListener('mousemove',(e)=>{
                 }
                 CreatePipes()
                 Movement()
+                CollisionTest()
                 document.body.innerHTML+=`<div id="plane"></div>`
                 document.getElementById("plane").style.left=`${e.clientX-2.5}px`
                 document.getElementById("plane").style.top=`${e.clientY-2.5}px`
@@ -142,7 +143,6 @@ document.body.addEventListener('mousemove',(e)=>{
         }
     }
     if(GameOver===false){
-        console.log(e.clientX,e.clientY)
         document.getElementById("plane").style.left=`${e.clientX-2.5}px`
         document.getElementById("plane").style.top=`${e.clientY-2.5}px`
         posX=e.clientX-10
