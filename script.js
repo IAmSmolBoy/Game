@@ -7,7 +7,6 @@ var Count=1
 var PipeList=[]
 var posX=0
 var posY=0
-var FirstPipeX=100
 
 function FindPipeHeight(i){
     return PipeList[i-1].slice(PipeList[i-1].length-2,PipeList[i-1].length)
@@ -16,10 +15,10 @@ function Pipes(height,num){
     PipeList.push(`Pipe${num}${height}`)
     document.body.innerHTML+=`<div id='Pipe${num}${height}' class='pipes' class='PipePipes'></div>
     <div id='OtherPipe${num}${height}' class="OtherPipes" class="PipePipes"></div>`
-    document.getElementById(`Pipe${num}${height}`).style.left=`200ex`
+    document.getElementById(`Pipe${num}${height}`).style.left=`700px`
     document.getElementById(`Pipe${num}${height}`).style.height=`${height}vh`
     document.getElementById(`OtherPipe${num}${height}`).style.height=`${100-height}vh`
-    document.getElementById(`OtherPipe${num}${height}`).style.left=`200ex`
+    document.getElementById(`OtherPipe${num}${height}`).style.left=`700px`
     document.getElementById(`OtherPipe${num}${height}`).style.top=`${20+parseInt(height)}vh`
 }
 function Delete(id){
@@ -60,18 +59,43 @@ function Movement(){
     setTimeout(function(){
         if(GameOver===false){
             for(i=1;i<=PipeList.length;i++){
-                document.getElementById(`Other${PipeList[i-1]}`).style.left=`${parseInt(document.getElementById(`Other${PipeList[i-1]}`).style.left)-1}ex`
-                document.getElementById(`${PipeList[i-1]}`).style.left=`${parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)-1}ex`
-                if(document.getElementById(`${PipeList[i-1]}`).style.left.slice(0,1)==='-'){
+                var Pipeloc=document.getElementById(`${PipeList[i-1]}`).style
+                var OtherPipeloc=document.getElementById(`Other${PipeList[i-1]}`).style
+                OtherPipeloc.left=`${parseInt(OtherPipeloc.left)-5}px`
+                Pipeloc.left=`${parseInt(Pipeloc.left)-5}px`
+                console.log(parseInt(`${Pipeloc.left}`.slice(0,Pipeloc.left.length-2)))
+                if(Pipeloc.left.slice(0,1)==='-'){
                     Delete(`${PipeList[i-1]}`)
                     Delete(`Other${PipeList[i-1]}`)
                     PipeList.splice(0,1)        
                 }
+                if(parseInt(`${Pipeloc.left}`.slice(0,Pipeloc.left.length-2))>=posX&&parseInt(`${Pipeloc.top}`)<=posY){
+                    console.log('hit')
+                    document.body.innerHTML=`<div id="gameover">Game Over</div>
+                    <div id="grass"></div>
+                    <button id="start">Restart Game</button>
+                    <script src="script.js"></script>
+                    <link rel="stylesheet" href="style.css">`
+                    GameOver=true
+                    document.body.style.cursor='auto'                   
+                }
+                if(parseInt(OtherPipeloc.left)>=posX&&parseInt(OtherPipeloc.top)>=posY){
+                    console.log('hit')
+                    document.body.innerHTML=`<div id="gameover">Game Over</div>
+                    <div id="grass"></div>
+                    <button id="start">Restart Game</button>
+                    <script src="script.js"></script>
+                    <link rel="stylesheet" href="style.css">`
+                    GameOver=true
+                    document.body.style.cursor='auto'
+                }
             }
-            FirstPipeX++
             Movement()
         }
     },30)
+}
+function ScrollUp(){
+    window.scroll(0,0)
 }
 
 startBtn.addEventListener('click',(e)=>{
