@@ -56,6 +56,7 @@ function CreatePipes(){
     }, 1000);
 }
 function Movement(){
+    window.scroll(0,0)
     setTimeout(function(){
         if(GameOver===false){
             for(i=1;i<=PipeList.length;i++){
@@ -74,8 +75,8 @@ function Movement(){
 }
 
 startBtn.addEventListener('click',(e)=>{
-    posX=e.clientX/12
-    posY=e.clientY/5
+    posX=e.clientX-10
+    posY=e.clientY-10
     GameOver=false
     if(GameOver===false){
         var Height=RanNum() 
@@ -85,16 +86,16 @@ startBtn.addEventListener('click',(e)=>{
     CreatePipes()
     Movement()
     document.body.innerHTML+=`<div id="plane"></div>`
-    document.getElementById("plane").style.left=`${e.clientX-12.5}px`
-    document.getElementById("plane").style.top=`${e.clientY-12.5}px`
+    document.getElementById("plane").style.left=`${e.clientX-2.5}px`
+    document.getElementById("plane").style.top=`${e.clientY-2.5}px`
     document.body.style.cursor='none'
     Delete('start')
     Delete('title')
 })
 document.body.addEventListener('mousemove',(e)=>{
-    if(posX<=0||posY<=0||posY>=105){
+    if(posX<=0||posY<=0||posY>=530){
         if(GameOver===false){
-            console.log(e.clientX/12,e.clientY/5)
+            console.log(e.clientX,e.clientY)
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
             <button id="start">Restart Game</button>
@@ -115,8 +116,8 @@ document.body.addEventListener('mousemove',(e)=>{
                 CreatePipes()
                 Movement()
                 document.body.innerHTML+=`<div id="plane"></div>`
-                document.getElementById("plane").style.left=`${e.clientX-12.5}px`
-                document.getElementById("plane").style.top=`${e.clientY-12.5}px`
+                document.getElementById("plane").style.left=`${e.clientX-2.5}px`
+                document.getElementById("plane").style.top=`${e.clientY-2.5}px`
                 document.body.style.cursor=`none`
                 Delete('start')
                 Delete('gameover')
@@ -124,11 +125,11 @@ document.body.addEventListener('mousemove',(e)=>{
         }
     }
     if(GameOver===false){
-        console.log(e.clientX/12,e.clientY/5)
-        document.getElementById("plane").style.left=`${e.clientX-12.5}px`
-        document.getElementById("plane").style.top=`${e.clientY-12.5}px`
-        posX=e.clientX/12
-        posY=e.clientY/5
+        console.log(e.clientX,e.clientY)
+        document.getElementById("plane").style.left=`${e.clientX-2.5}px`
+        document.getElementById("plane").style.top=`${e.clientY-2.5}px`
+        posX=e.clientX-10
+        posY=e.clientY-10
         document.body.style.cursor=`none` 
     }
 })
