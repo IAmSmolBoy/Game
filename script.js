@@ -8,8 +8,13 @@ var PipeList=[]
 var posX=0
 var posY=0
 
-function FindPipeHeight(i){
-    return PipeList[i-1].slice(PipeList[i-1].length-2,PipeList[i-1].length)
+function FindPipeHeight(i,PipeType){
+    if(PipeType==='Pipe'){
+        return parseInt(PipeList[i-1].slice(PipeList[i-1].length-2,PipeList[i-1].length))
+    }
+    if(PipeType==='Other'){
+        return 80-parseInt(PipeList[i-1].slice(PipeList[i-1].length-2,PipeList[i-1].length))
+    }
 }
 function Pipes(height,num){ 
     PipeList.push(`Pipe${num}${height}`)
@@ -52,13 +57,12 @@ function CreatePipes(){
             Count++
             CreatePipes()
         }
-    }, 1000);
+    }, 1500);
 }
 function ScrollUp(){
     window.scroll(0,0)
 }
 function Movement(){
-    window.scroll(0,0)
     setTimeout(function(){
         if(GameOver===false){
             for(i=1;i<=PipeList.length;i++){
@@ -72,8 +76,8 @@ function Movement(){
                     PipeList.splice(0,1)        
                 }
             }
-            Movement()
             ScrollUp()
+            Movement()
         }
     },30)
 }
@@ -81,19 +85,74 @@ function CollisionTest(){
     setTimeout(function(){
         for(i=1;i<=PipeList.length;i++){
             var PipeX=document.getElementById(`${PipeList[i-1]}`).style.left
-            var PipeY=FindPipeHeight(i)
-            if(posX>parseInt(PipeX)){
-                console.log(`past${i}`)
+            var PipeY=FindPipeHeight(i,'Pipe')
+            var OtherPipeY=FindPipeHeight(i,'Other')
+            if(posX>=parseInt(PipeX)&&posY/document.documentElement.clientHeight*100<PipeY&&posX<parseInt(PipeX)+25){    
+            document.body.innerHTML=`<div id="gameover">Game Over</div>
+            <div id="grass"></div>
+            <button id="start">Restart Game</button>
+            <script src="script.js"></script>
+            <link rel="stylesheet" href="style.css">`
+            GameOver=true
+            document.body.style.cursor='auto'
+            document.getElementById('start').addEventListener('click',(e)=>{
+                PipeList=[]
+                posX=50
+                posY=50
+                GameOver=false
+                if(GameOver===false){
+                    var Height=RanNum() 
+                    Pipes(Height,Count)
+                    Count++
+                }
+                CreatePipes()
+                Movement()
+                CollisionTest()
+                document.body.innerHTML+=`<div id="plane"></div>`
+                document.getElementById("plane").style.left=`${e.clientX-2.5}px`
+                document.getElementById("plane").style.top=`${e.clientY-2.5}px`
+                document.body.style.cursor=`none`
+                Delete('start')
+                Delete('gameover')
+            })
             }
-            // console.log(`${parseInt(PipeX)}  `,`${PipeY}`,PipeList[i-1])
+            if(posX>=parseInt(PipeX)&&posY/document.documentElement.clientHeight*100<OtherPipeY&&posX<parseInt(PipeX)+25){
+
+                document.body.innerHTML=`<div id="gameover">Game Over</div>
+                <div id="grass"></div>
+                <button id="start">Restart Game</button>
+                <script src="script.js"></script>
+                <link rel="stylesheet" href="style.css">`
+                GameOver=true
+                document.body.style.cursor='auto'
+                document.getElementById('start').addEventListener('click',(e)=>{
+                    PipeList=[]
+                    posX=50
+                    posY=50
+                    GameOver=false
+                    if(GameOver===false){
+                        var Height=RanNum() 
+                        Pipes(Height,Count)
+                        Count++
+                    }
+                    CreatePipes()
+                    Movement()
+                    CollisionTest()
+                    document.body.innerHTML+=`<div id="plane"></div>`
+                    document.getElementById("plane").style.left=`${e.clientX-2.5}px`
+                    document.getElementById("plane").style.top=`${e.clientY-2.5}px`
+                    document.body.style.cursor=`none`
+                    Delete('start')
+                    Delete('gameover')
+                })
+            }   
         }
     CollisionTest()    
-    },30)   
+    },30)
 }
-
 startBtn.addEventListener('click',(e)=>{
-    posX=e.clientX-10
-    posY=e.clientY-10
+    posX=e.clientX+10
+    posY=e.clientY+10
     GameOver=false
     if(GameOver===false){
         var Height=RanNum() 
@@ -109,7 +168,7 @@ startBtn.addEventListener('click',(e)=>{
     document.body.style.cursor='none'
     Delete('start')
     Delete('title')
-})
+})      
 document.body.addEventListener('mousemove',(e)=>{
     if(posX<=0||posY<=0||posY>=530){
         if(GameOver===false){
@@ -145,8 +204,8 @@ document.body.addEventListener('mousemove',(e)=>{
     if(GameOver===false){
         document.getElementById("plane").style.left=`${e.clientX-2.5}px`
         document.getElementById("plane").style.top=`${e.clientY-2.5}px`
-        posX=e.clientX-10
-        posY=e.clientY-10
+        posX=e.clientX+10
+        posY=e.clientY+10
         document.body.style.cursor=`none` 
     }
 })
