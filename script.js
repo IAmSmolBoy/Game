@@ -86,8 +86,7 @@ function CollisionTest(){
         for(i=1;i<=PipeList.length;i++){
             var PipeX=parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)
             var PipeY=FindPipeHeight(i,'Pipe')
-            if(posX>=PipeX&&posY/document.documentElement.clientHeight*100<PipeY&&posX<PipeX+25){    
-            console.log('hit1')
+            if(posX>=PipeX&&posY/document.documentElement.clientHeight*100<PipeY&&posX<PipeX+25){
                 document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
             <button id="start">Restart Game</button>
@@ -115,7 +114,6 @@ function CollisionTest(){
             })
         }
         if(posX>=parseInt(PipeX)&&posY/document.documentElement.clientHeight*100>20+PipeY&&posX<parseInt(PipeX)+25){
-            console.log('hit2')
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
             <button id="start">Restart Game</button>
@@ -166,7 +164,6 @@ startBtn.addEventListener('click',(e)=>{
 document.body.addEventListener('mousemove',(e)=>{
     if(posX<=20||posY<=12.5||posY>=document.documentElement.clientHeight-10){
         if(GameOver===false){
-            console.log('hit3')
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
             <button id="start">Restart Game</button>
