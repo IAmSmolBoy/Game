@@ -53,3 +53,11 @@ body{
     background-color: red;
     width: 25px;
 }
+#Rules{
+    position: absolute;
+    top:0px;
+    width: 93vw;
+    text-align: right;
+    font-size:30px; 
+    font-family: sans-serif;
+}
