@@ -20,10 +20,10 @@ function Pipes(height,num){
     PipeList.push(`Pipe${num}${height}`)
     document.body.innerHTML+=`<div id='Pipe${num}${height}' class='pipes' class='PipePipes'></div>
     <div id='OtherPipe${num}${height}' class="OtherPipes" class="PipePipes"></div>`
-    document.getElementById(`Pipe${num}${height}`).style.left=`1500px`
+    document.getElementById(`Pipe${num}${height}`).style.left=`1600px`
     document.getElementById(`Pipe${num}${height}`).style.height=`${height}vh`
     document.getElementById(`OtherPipe${num}${height}`).style.height=`${100-height}vh`
-    document.getElementById(`OtherPipe${num}${height}`).style.left=`1500px`
+    document.getElementById(`OtherPipe${num}${height}`).style.left=`1600px`
     document.getElementById(`OtherPipe${num}${height}`).style.top=`${20+parseInt(height)}vh`
 }
 function Delete(id){
@@ -160,7 +160,12 @@ startBtn.addEventListener('click',(e)=>{
     document.body.style.cursor='none'
     Delete('start')
     Delete('title')
-})      
+    Delete('Rules')
+    Delete('rule1')
+    Delete('rule2')
+    Delete('rule3')
+    Delete('rule4')
+})
 document.body.addEventListener('mousemove',(e)=>{
     if(posX<=20||posY<=12.5||posY>=document.documentElement.clientHeight-10){
         if(GameOver===false){
@@ -198,4 +203,4 @@ document.body.addEventListener('mousemove',(e)=>{
         posY=e.clientY
         document.body.style.cursor=`none` 
     }
-})
+})  
