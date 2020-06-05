@@ -10,6 +10,7 @@ body{
     text-align: center;
     font-size: 30px;
     color:red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 #plane{
     position:absolute;  
@@ -33,7 +34,8 @@ body{
     width:100vw;
     text-align: center;
     top:0vh;
-    font-size:30px;             
+    font-size:30px;
+    font-family: cursive;            
 }
 #start{
     cursor: pointer;
@@ -60,7 +62,7 @@ body{
     width: 89.5vw;
     text-align: right;
     font-size:30px; 
-    font-family: sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .rule{
     position: relative;
@@ -68,7 +70,7 @@ body{
     width: 97vw;
     text-align: right;
     font-size:20px; 
-    font-family: sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 #rule4{
     position: relative;
@@ -76,5 +78,15 @@ body{
     width: 93vw;
     text-align: right;
     font-size:20px; 
-    font-family: sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.scores{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#highscore{
+    position: relative;
+    top:5vh;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

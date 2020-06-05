@@ -7,6 +7,8 @@ var Count=1
 var PipeList=[]
 var posX=0
 var posY=0
+var Highscore=0
+var score=0
 
 function FindPipeHeight(i,PipeType){
     if(PipeType==='Pipe'){
@@ -88,58 +90,75 @@ function CollisionTest(){
             var PipeY=FindPipeHeight(i,'Pipe')
             if(posX>=PipeX&&posY/document.documentElement.clientHeight*100<PipeY&&posX<PipeX+25){
                 document.body.innerHTML=`<div id="gameover">Game Over</div>
-            <div id="grass"></div>
-            <button id="start">Restart Game</button>
-            <script src="script.js"></script>
-            <link rel="stylesheet" href="style.css">`
-            GameOver=true
-            document.body.style.cursor='auto'
-            document.getElementById('start').addEventListener('click',(e)=>{
-                PipeList=[]
-                posX=50
-                posY=50
-                GameOver=false
-                var Height=RanNum() 
-                Pipes(Height,Count)
-                Count++
-                CreatePipes()
-                Movement()
-                CollisionTest()
-                document.body.innerHTML+=`<div id="plane"></div>`
-                document.getElementById("plane").style.left=`${e.clientX-12.5}px`
-                document.getElementById("plane").style.top=`${e.clientY-12.5}px`
-                document.body.style.cursor=`none`
-                Delete('start')
-                Delete('gameover')
-            })
-        }
-        if(posX>=parseInt(PipeX)&&posY/document.documentElement.clientHeight*100>20+PipeY&&posX<parseInt(PipeX)+25){
-            document.body.innerHTML=`<div id="gameover">Game Over</div>
-            <div id="grass"></div>
-            <button id="start">Restart Game</button>
-            <script src="script.js"></script>
-            <link rel="stylesheet" href="style.css">`
-            GameOver=true
-            document.body.style.cursor='auto'
-            document.getElementById('start').addEventListener('click',(e)=>{
-                PipeList=[]
-                posX=50
-                posY=50
-                GameOver=false
-                var Height=RanNum() 
-                Pipes(Height,Count)
-                Count++
-                CreatePipes()
-                Movement()
-                CollisionTest()
-                document.body.innerHTML+=`<div id="plane"></div>`
-                document.getElementById("plane").style.left=`${e.clientX-12.5}px`
-                document.getElementById("plane").style.top=`${e.clientY-12.5}px`
-                document.body.style.cursor=`none`
-                Delete('start')
-                Delete('gameover')
-            })
-        }   
+                <div id="grass"></div>
+                <div id='highscore'>Highscore:${Highscore}</div>
+                <button id="start">Restart Game</button>
+                <script src="script.js"></script>
+                <link rel="stylesheet" href="style.css">`
+                Highscore=score
+                score=0
+                GameOver=true
+                document.body.style.cursor='auto'
+                document.getElementById('start').addEventListener('click',(e)=>{
+                    Delete('highscore')
+                    PipeList=[]
+                    posX=50
+                    posY=50
+                    GameOver=false
+                    var Height=RanNum() 
+                    Pipes(Height,Count)
+                    Count++
+                    CreatePipes()
+                    Movement()
+                    CollisionTest()
+                    document.body.innerHTML+=`<div id="plane"></div>
+                    <div class='scores'>Highscore:${Highscore}</div>
+                    <div class='scores'>Score:${score}</div>
+                    `
+                    document.getElementById("plane").style.left=`${e.clientX-12.5}px`
+                    document.getElementById("plane").style.top=`${e.clientY-12.5}px`
+                    document.body.style.cursor=`none`
+                    Delete('start')
+                    Delete('gameover')
+                })
+            }
+            if(posX>=parseInt(PipeX)&&posY/document.documentElement.clientHeight*100>20+PipeY&&posX<parseInt(PipeX)+25){
+                document.body.innerHTML=`<div id="gameover">Game Over</div>
+                <div id="grass"></div>
+                <div id='highscore'>Highscore:${Highscore}</div>
+                <button id="start">Restart Game</button>
+                <script src="script.js"></script>
+                <link rel="stylesheet" href="style.css">`
+                Highscore=score
+                score=0
+                GameOver=true
+                document.body.style.cursor='auto'
+                document.getElementById('start').addEventListener('click',(e)=>{
+                    Delete('highscore')
+                    PipeList=[]
+                    posX=50
+                    posY=50
+                    GameOver=false
+                    var Height=RanNum() 
+                    Pipes(Height,Count)
+                    Count++
+                    CreatePipes()
+                    Movement()
+                    CollisionTest()
+                    document.body.innerHTML+=`<div id="plane"></div>
+                    <div class='scores'>Highscore:${Highscore}</div>
+                    <div class='scores'>Score:${score}</div>
+                    `
+                    document.getElementById("plane").style.left=`${e.clientX-12.5}px`
+                    document.getElementById("plane").style.top=`${e.clientY-12.5}px`
+                    document.body.style.cursor=`none`
+                    Delete('start')
+                    Delete('gameover')
+                })
+            }
+            if(posX>PipeX){
+                console.log(Count)
+            }
         }
     CollisionTest()    
     },30)
@@ -154,7 +173,9 @@ startBtn.addEventListener('click',(e)=>{
     CreatePipes()
     Movement()
     CollisionTest()
-    document.body.innerHTML+=`<div id="plane"></div>`
+    document.body.innerHTML+=`<div id="plane"></div>
+    <div class='scores'>Highscore:${Highscore}</div>
+    <div class='scores'>Score:${score}</div>`
     document.getElementById("plane").style.left=`${e.clientX-12.5}px`
     document.getElementById("plane").style.top=`${e.clientY-12.5}px`
     document.body.style.cursor='none'
@@ -171,12 +192,16 @@ document.body.addEventListener('mousemove',(e)=>{
         if(GameOver===false){
             document.body.innerHTML=`<div id="gameover">Game Over</div>
             <div id="grass"></div>
+            <div id='highscore'>Highscore:${Highscore}</div>
             <button id="start">Restart Game</button>
             <script src="script.js"></script>
             <link rel="stylesheet" href="style.css">`
+            Highscore=score
+            score=0
             GameOver=true
             document.body.style.cursor='auto'
             document.getElementById('start').addEventListener('click',(e)=>{
+                Delete('highscore')
                 PipeList=[]
                 posX=50
                 posY=50
@@ -187,7 +212,10 @@ document.body.addEventListener('mousemove',(e)=>{
                 CreatePipes()
                 Movement()
                 CollisionTest()
-                document.body.innerHTML+=`<div id="plane"></div>`
+                document.body.innerHTML+=`<div id="plane"></div>
+                <div class='scores'>Highscore:${Highscore}</div>
+                <div class='scores'>Score:${score}</div>
+                `
                 document.getElementById("plane").style.left=`${e.clientX-12.5}px`
                 document.getElementById("plane").style.top=`${e.clientY-12.5}px`
                 document.body.style.cursor=`none`
