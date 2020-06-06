@@ -31,9 +31,9 @@ img{
     cursor:none;
 }
 #title{
+    position: absolute;
     width:100vw;
     text-align: center;
-    top:0vh;
     font-size:30px;
     font-family: cursive;            
 }
@@ -57,8 +57,7 @@ img{
     width: 25px;
 }
 #Rules{
-    position: absolute;
-    top:0px;
+    position: relative;
     width: 89.5vw;
     text-align: right;
     font-size:30px; 
@@ -81,6 +80,7 @@ img{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .scores{
+    position: relative;
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

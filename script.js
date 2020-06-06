@@ -85,6 +85,10 @@ function CollisionTest(){
                 <button id="start">Restart Game</button>
                 <script src="script.js"></script>
                 <link rel="stylesheet" href="style.css">`
+                
+            if(score>Highscore){
+                Highscore=score
+            }
                 Highscore=score
                 score=0
                 GameOver=true
@@ -119,6 +123,9 @@ function CollisionTest(){
                 <button id="start">Restart Game</button>
                 <script src="script.js"></script>
                 <link rel="stylesheet" href="style.css">`
+            if(score>Highscore){
+                Highscore=score
+            }
                 Highscore=score
                 score=0
                 GameOver=true
@@ -150,7 +157,6 @@ function CollisionTest(){
                 score++
                 document.getElementById('score').innerHTML=`Score:${score}`
                 PipesPassed.push(`${PipeList[i-1]}1`)
-                console.log(PipesPassed)
                 document.getElementById(`${PipeList[i-1]}`).id=`${PipeList[i-1]}1`
                 document.getElementById(`Other${PipeList[i-1]}`).id=`Other${PipeList[i-1]}1`
                 PipeList.splice(0,1)
@@ -162,11 +168,10 @@ function CollisionTest(){
 }
 function MovementPassed(){
     setTimeout(function(){
-        for(i=1;i<=PipesPassed.length;i++){
+        for(i=1;i>PipesPassed.length;i++){
             document.getElementById(`Other${PipesPassed[i-1]}`).style.left=`${parseInt(document.getElementById(`Other${PipesPassed[i-1]}`).style.left)-5}px`
             document.getElementById(`${PipesPassed[i-1]}`).style.left=`${parseInt(document.getElementById(`${PipesPassed[i-1]}`).style.left)-5}px`
         }
-    MovementPassed()    
     },30)
 }
 
@@ -174,7 +179,6 @@ startBtn.addEventListener('click',(e)=>{
     posX=e.clientX+10
     posY=e.clientY
     GameOver=false
-    var Height=RanNum()
     Count++
     CreatePipes()
     CollisionTest()
@@ -202,7 +206,9 @@ document.body.addEventListener('mousemove',(e)=>{
             <button id="start">Restart Game</button>
             <script src="script.js"></script>
             <link rel="stylesheet" href="style.css">`
-            Highscore=score
+            if(score>Highscore){
+                Highscore=score
+            }
             score=0
             GameOver=true
             document.body.style.cursor='auto'
@@ -214,10 +220,10 @@ document.body.addEventListener('mousemove',(e)=>{
                 posY=50
                 GameOver=false
                 var Height=RanNum()
+                Pipes(Height,Count)
                 Count++
                 CreatePipes()
                 CollisionTest()
-                MovementPassed()
                 document.body.innerHTML+=`<div id="plane"></div>
                 <div class='scores'>Highscore:${Highscore}</div>
                 <div class='scores' id='score'>Score:${score}</div>
