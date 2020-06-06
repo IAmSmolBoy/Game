@@ -68,7 +68,6 @@ function ScrollUp(){
 function CollisionTest(){
     setTimeout(function(){
         for(i=1;i<=PipeList.length;i++){
-            var PipeX=parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)
             var PipeY=FindPipeHeight(i,'Pipe')
             var Pipeloc=document.getElementById(`${PipeList[i-1]}`).style
             var OtherPipeloc=document.getElementById(`Other${PipeList[i-1]}`).style
@@ -79,7 +78,7 @@ function CollisionTest(){
                 Delete(`Other${PipeList[i-1]}`)
                 PipeList.splice(0,1)        
             }
-            if(posX>=PipeX&&posY/document.documentElement.clientHeight*100<PipeY&&posX<PipeX+25){
+            if(posX>=parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)&&posY/document.documentElement.clientHeight*100<PipeY&&posX<parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)+25){
                 document.body.innerHTML=`<div id="gameover">Game Over</div>
                 <div id="grass"></div>
                 <div id='highscore'>Highscore:${Highscore}</div>
@@ -113,7 +112,7 @@ function CollisionTest(){
                     Delete('gameover')
                 })
             }
-            if(posX>=parseInt(PipeX)&&posY/document.documentElement.clientHeight*100>20+PipeY&&posX<parseInt(PipeX)+25){
+            if(posX>=parseInt(parseInt(document.getElementById(`${PipeList[i-1]}`).style.left))&&posY/document.documentElement.clientHeight*100>20+PipeY&&posX<parseInt(parseInt(document.getElementById(`${PipeList[i-1]}`).style.left))+25){
                 document.body.innerHTML=`<div id="gameover">Game Over</div>
                 <div id="grass"></div>
                 <div id='highscore'>Highscore:${Highscore}</div>
@@ -147,16 +146,14 @@ function CollisionTest(){
                     Delete('gameover')
                 })
             }
-            else{
-                if(posX>parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)&&posY/document.documentElement.clientHeight*100<20+PipeY&&posY/document.documentElement.clientHeight*100<PipeY){
-                    score++
-                    document.getElementById('score').innerHTML=`${score}`
-                    PipesPassed.push(`${PipeList[i-1]}1`)
-                    console.log(PipesPassed)
-                    document.getElementById(`${PipeList[i-1]}`).id=`${PipeList[i-1]}1`
-                    document.getElementById(`Other${PipeList[i-1]}`).id=`Other${PipeList[i-1]}1`
-                    PipeList.splice(0,1)
-                }
+            if(posX>parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)&&posY/document.documentElement.clientHeight*100<20+PipeY<PipeY){
+                score++
+                document.getElementById('score').innerHTML=`${score}`
+                PipesPassed.push(`${PipeList[i-1]}1`)
+                console.log(PipesPassed)
+                document.getElementById(`${PipeList[i-1]}`).id=`${PipeList[i-1]}1`
+                document.getElementById(`Other${PipeList[i-1]}`).id=`Other${PipeList[i-1]}1`
+                PipeList.splice(0,1)
             }
         }
     ScrollUp()
@@ -166,11 +163,10 @@ function CollisionTest(){
 function MovementPassed(){
     setTimeout(function(){
         for(i=1;i<=PipesPassed.length;i++){
-            var Pipeloc=document.getElementById(`${PipesPassed[i-1]}`).style
-            var OtherPipeloc=document.getElementById(`Other${PipesPassed[i-1]}`).style
-            OtherPipeloc.left=`${parseInt(OtherPipeloc.left)-5}px`
-            Pipeloc.left=`${parseInt(Pipeloc.left)-5}px`
+            document.getElementById(`Other${PipesPassed[i-1]}`).style.left=`${parseInt(document.getElementById(`Other${PipesPassed[i-1]}`).style.left)-5}px`
+            document.getElementById(`${PipesPassed[i-1]}`).style.left=`${parseInt(document.getElementById(`${PipesPassed[i-1]}`).style.left)-5}px`
         }
+    MovementPassed()    
     },30)
 }
 
@@ -182,6 +178,7 @@ startBtn.addEventListener('click',(e)=>{
     Count++
     CreatePipes()
     CollisionTest()
+    MovementPassed()
     document.body.innerHTML+=`<div id="plane"></div>
     <div class='scores'>Highscore:${Highscore}</div>
     <div class='scores' id='score'>Score:${score}</div>`
@@ -220,6 +217,7 @@ document.body.addEventListener('mousemove',(e)=>{
                 Count++
                 CreatePipes()
                 CollisionTest()
+                MovementPassed()
                 document.body.innerHTML+=`<div id="plane"></div>
                 <div class='scores'>Highscore:${Highscore}</div>
                 <div class='scores' id='score'>Score:${score}</div>
