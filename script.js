@@ -33,10 +33,10 @@ function Pipes(height,num){
     PipeList.push(`Pipe${num}${height}`)
     document.body.innerHTML+=`<div id='Pipe${num}${height}' class='pipes' class='PipePipes'></div>
     <div id='OtherPipe${num}${height}' class="OtherPipes" class="PipePipes"></div>`
-    document.getElementById(`Pipe${num}${height}`).style.left=`1600px`
+    document.getElementById(`Pipe${num}${height}`).style.left=`${document.documentElement.clientWidth+100}px`
     document.getElementById(`Pipe${num}${height}`).style.height=`${height}vh`
     document.getElementById(`OtherPipe${num}${height}`).style.height=`${100-height}vh`
-    document.getElementById(`OtherPipe${num}${height}`).style.left=`1600px`
+    document.getElementById(`OtherPipe${num}${height}`).style.left=`${document.documentElement.clientWidth+100}px`
     document.getElementById(`OtherPipe${num}${height}`).style.top=`${20+parseInt(height)}vh`
 }
 function Delete(id){
