@@ -148,7 +148,7 @@ function CollisionTest(){
             }
             if(posX>parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)&&posY/document.documentElement.clientHeight*100<20+PipeY<PipeY){
                 score++
-                document.getElementById('score').innerHTML=`${score}`
+                document.getElementById('score').innerHTML=`Score:${score}`
                 PipesPassed.push(`${PipeList[i-1]}1`)
                 console.log(PipesPassed)
                 document.getElementById(`${PipeList[i-1]}`).id=`${PipeList[i-1]}1`
