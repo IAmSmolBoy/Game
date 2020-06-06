@@ -171,6 +171,13 @@ function CollisionTest(){
                 PipeList.splice(0,1)
             }
         }
+        if(PipesPassed.length!=0){
+            for(i=1;i<=PipesPassed.length;i++){
+                console.log('Hello there')
+                document.getElementById(`Other${PipesPassed[i-1]}`).style.left=`${parseInt(document.getElementById(`Other${PipesPassed[i-1]}`).style.left)-5}px`
+                document.getElementById(`${PipesPassed[i-1]}`).style.left=`${parseInt(document.getElementById(`${PipesPassed[i-1]}`).style.left)-5}px`
+            }
+        }
     ScrollUp()
     CollisionTest()
     },30)
