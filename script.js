@@ -80,7 +80,6 @@ function CollisionTest(){
             }
             if(posX>=parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)&&posY/document.documentElement.clientHeight*100<PipeY&&posX<parseInt(document.getElementById(`${PipeList[i-1]}`).style.left)+25){
                 document.body.innerHTML=`<div id="gameover">Game Over</div>
-                <div id="grass"></div>
                 <div id='highscore'>Highscore:${Highscore}</div>
                 <button id="start">Restart Game</button>
                 <script src="script.js"></script>
@@ -114,7 +113,6 @@ function CollisionTest(){
             }
             if(posX>=parseInt(parseInt(document.getElementById(`${PipeList[i-1]}`).style.left))&&posY/document.documentElement.clientHeight*100>20+PipeY&&posX<parseInt(parseInt(document.getElementById(`${PipeList[i-1]}`).style.left))+25){
                 document.body.innerHTML=`<div id="gameover">Game Over</div>
-                <div id="grass"></div>
                 <div id='highscore'>Highscore:${Highscore}</div>
                 <button id="start">Restart Game</button>
                 <script src="script.js"></script>
@@ -197,7 +195,6 @@ document.body.addEventListener('mousemove',(e)=>{
     if(posX<=20||posY<=12.5||posY>=document.documentElement.clientHeight-10){
         if(GameOver===false){
             document.body.innerHTML=`<div id="gameover">Game Over</div>
-            <div id="grass"></div>
             <div id='highscore'>Highscore:${Highscore}</div>
             <button id="start">Restart Game</button>
             <script src="script.js"></script>

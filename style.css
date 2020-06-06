@@ -1,6 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 body{
-    background-color: skyblue;
+    width:100vw;
+    height:100vh;
+}
+img{
+    position: absolute;
+    left: 0px;
     width:100vw;
     height:100vh;
 }
@@ -19,15 +24,6 @@ body{
     text-align: inherit;
     background-color: black;
     color:red;
-    cursor:none;
-}
-#grass{
-    position:absolute;
-    left:0px;
-    top:90vh;
-    height:15vh;
-    width:100vw;
-    background-color: green;
     cursor:none;
 }
 #title{
